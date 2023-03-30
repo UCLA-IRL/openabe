@@ -5,7 +5,7 @@ FORMAT=tar.gz
 LINK=https://github.com/relic-toolkit/relic
 RELIC=${1:-relic-toolkit-${VERSION}}
 
-# commit of as of 22/07/2022
+# commit of as of 22/06/2022
 # comment 'Update LABEL with recent changes'
 COMMIT=40f24f017d461647ce6202c3ccaae3c22037369c
 
@@ -18,7 +18,12 @@ COMMIT=40f24f017d461647ce6202c3ccaae3c22037369c
 echo "Clone github repo @ ${LINK}"
 git clone ${LINK} ${RELIC}.git
 cd ${RELIC}.git
-git reset --hard ${COMMIT}
+git checkout ${COMMIT}
+git remote add tyler https://github.com/tylerliu/relic
+git fetch tyler
+git config user.email "you@example.com"
+git config user.name "Your Name"
+git cherry-pick 6c383a1e97971fb342dc406a1b5da82af3df8b40
 
 if [[ ! -f ${RELIC}.${FORMAT} ]]; then
    echo "Create archive of source (without git files)"
